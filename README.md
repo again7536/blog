@@ -1,0 +1,1 @@
+# next_lint_husky_boilerplate
