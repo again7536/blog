@@ -1,0 +1,35 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+echo '커밋 이전 정적 검사 수행.'
+
+# Check Prettier standards
+yarn format ||
+(
+    echo 'Prettier 검사 실패.';
+    false;
+)
+
+# Check ESLint Standards
+yarn lint ||
+(
+        echo 'ESLint 검사 실패.'
+        false; 
+)
+
+# Check tsconfig standards
+npm run check-types ||
+(
+    echo 'Typescript 타입 검사 실패.'
+    false;
+)
+
+echo '*** 모든 정적 검사 통과 ***'
+
+yarn build ||
+(
+    echo '빌드 실패.'
+    false;
+)
+
+echo '커밋을 진행합니다.'
