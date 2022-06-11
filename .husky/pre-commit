@@ -17,8 +17,15 @@ yarn lint ||
         false; 
 )
 
+# Check StyleLint Standards
+yarn lint:css ||
+(
+        echo 'StyleLint 검사 실패.'
+        false; 
+)
+
 # Check tsconfig standards
-npm run check-types ||
+yarn check-type ||
 (
     echo 'Typescript 타입 검사 실패.'
     false;
@@ -26,10 +33,10 @@ npm run check-types ||
 
 echo '*** 모든 정적 검사 통과 ***'
 
-yarn build ||
-(
-    echo '빌드 실패.'
-    false;
-)
+# yarn build ||
+# (
+#     echo '빌드 실패.'
+#     false;
+# )
 
 echo '커밋을 진행합니다.'

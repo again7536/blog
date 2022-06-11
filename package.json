@@ -9,6 +9,7 @@
     "format": "prettier --check .",
     "lint": "next lint",
     "lint:css": "stylelint \"./components/**/*.{ts,tsx}\"",
+    "check-type": "tsc --noEmit",
     "prepare": "husky install"
   },
   "dependencies": {
