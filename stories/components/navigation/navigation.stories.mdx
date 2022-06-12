@@ -1,0 +1,28 @@
+import { Canvas, Meta, Story } from '@storybook/addon-docs';
+import { Navigation, NavLink } from './navigation';
+
+export const WrappedNavigation = (props) => (
+    <Navigation {...props}> 
+        <NavLink href="">hi</NavLink>
+        <NavLink href="">hi</NavLink>
+        <NavLink href="">hi</NavLink>
+    </Navigation>
+);
+<Meta title="MDX/Navigation" component={WrappedNavigation} />
+
+export const Template = args => <WrappedNavigation {...args} />;
+
+# Navigation
+
+With `MDX`, we can define a story for `Navigation` right in the middle of our Markdown documentation.
+
+<Canvas>
+  <Story
+    name="Default"
+    args={{
+      color:''
+    }}
+  >
+    {Template.bind({})}
+  </Story>
+</Canvas>
