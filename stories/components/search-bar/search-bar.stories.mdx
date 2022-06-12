@@ -1,0 +1,24 @@
+import { Canvas, Meta, Story } from '@storybook/addon-docs';
+import { SearchBar } from './search-bar';
+
+export const WrappedSearchBar = (props) => (
+    <SearchBar {...props}/>
+);
+<Meta title="MDX/Navigation" component={WrappedSearchBar} />
+
+export const Template = args => <WrappedSearchBar {...args} />;
+
+# Navigation
+
+With `MDX`, we can define a story for `Navigation` right in the middle of our Markdown documentation.
+
+<Canvas>
+  <Story
+    name="Default"
+    args={{
+      color:''
+    }}
+  >
+    {Template.bind({})}
+  </Story>
+</Canvas>
