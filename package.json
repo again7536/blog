@@ -8,7 +8,7 @@
     "start": "next start",
     "format": "prettier --check .",
     "lint": "next lint",
-    "lint:css": "stylelint \"./components/**/*.{ts,tsx}\"",
+    "lint:css": "stylelint \"./stories/**/*.{ts,tsx}\"",
     "check-type": "tsc --noEmit",
     "prepare": "husky install",
     "storybook": "start-storybook -p 6006",
