@@ -1,0 +1,23 @@
+import { Canvas, Meta, Story } from '@storybook/addon-docs';
+import { PostBox } from './post-box';
+
+<Meta title="MDX/PostBox" component={PostBox} />
+
+export const Template = args => <PostBox {...args} />;
+
+# Navigation
+
+With `MDX`, we can define a story for `Navigation` right in the middle of our Markdown documentation.
+
+<Canvas>
+  <Story
+    name="Default"
+    args={{
+      imgUrl:'https://static.remove.bg/remove-bg-web/eb1bb48845c5007c3ec8d72ce7972fc8b76733b1/assets/start-1abfb4fe2980eabfbbaaa4365a0692539f7cd2725f324f904565a9a744f8e214.jpg',
+      title:'hi',
+      summary:'hi',
+    }}
+  >
+    {Template.bind({})}
+  </Story>
+</Canvas>
