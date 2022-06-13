@@ -1,4 +1,5 @@
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
+import '../node_modules/github-markdown-css/github-markdown.css';
 import GlobalStyle from '../styles/global-style';
 import type { AppProps } from 'next/app';
 import { ThemeProvider } from 'styled-components';
