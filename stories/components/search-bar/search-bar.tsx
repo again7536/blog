@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 
 const SearchBar = styled.input.attrs(props => ({
-  className: `form-control`,
-  type: 'search',
   ...props,
+  className: 'form-control ' + props.className,
+  type: 'search',
 }))`
   color: ${props => props.theme.colors.red};
 
