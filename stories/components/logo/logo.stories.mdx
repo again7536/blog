@@ -1,0 +1,21 @@
+import { Canvas, Meta, Story } from '@storybook/addon-docs';
+import { Logo } from './index';
+
+<Meta title="MDX/Logo" component={Logo} />
+
+export const Template = args => <Logo {...args} />;
+
+# Logo
+
+With `MDX`, we can define a story for `Logo` right in the middle of our Markdown documentation.
+
+<Canvas>
+  <Story
+    name="Normal"
+    args={{
+      color:''
+    }}
+  >
+    {Template.bind({})}
+  </Story>
+</Canvas>

@@ -5,12 +5,13 @@ const LogoStyle = styled.div.attrs(props => ({
   ...props,
 }))`
   vertical-align: baseline;
+  text-align: ${(props: any) => props.textAlign ?? 'center'};
   line-height: 24pt;
-  font-size: 20pt;
+  font-size: 18pt;
   cursor: pointer;
 
   @media screen and (max-width: 992px) {
-    font-size: 15pt;
+    font-size: 14pt;
   }
 `;
 

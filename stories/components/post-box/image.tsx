@@ -5,8 +5,13 @@ const PostBoxImage = styled.img.attrs(props => ({
   src: props.src,
 }))`
   height: 150px;
+  max-width: 300px;
 
   object-fit: cover;
+
+  @media screen and (max-width: 576px) {
+    max-width: none;
+  }
 `;
 
 export { PostBoxImage };

@@ -1,0 +1,21 @@
+import { Canvas, Meta, Story } from '@storybook/addon-docs';
+import { MarkdownView } from './index';
+
+<Meta title="MDX/MarkdownView" component={MarkdownView} />
+
+export const Template = args => <MarkdownView {...args} />;
+
+# MarkdownView
+
+With `MDX`, we can define a story for `MarkdownView` right in the middle of our Markdown documentation.
+
+<Canvas>
+  <Story
+    name="Normal"
+    args={{
+      color:''
+    }}
+  >
+    {Template.bind({})}
+  </Story>
+</Canvas>

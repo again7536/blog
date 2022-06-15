@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 const Button = styled.button.attrs(props => ({
+  ...props,
   className: `btn`,
 }))`
   color: ${props => props.theme.colors.red};

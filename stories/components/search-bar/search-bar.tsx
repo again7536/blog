@@ -6,6 +6,7 @@ const SearchBar = styled.input.attrs(props => ({
   type: 'search',
 }))`
   color: ${props => props.theme.colors.red};
+  border: none;
 
   &:focus,
   &:active {
