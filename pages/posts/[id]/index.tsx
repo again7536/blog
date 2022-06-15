@@ -1,14 +1,17 @@
 import { GetStaticPropsContext } from 'next';
 import fs from 'fs';
+import sqlite3 from 'sqlite3';
+import { open } from 'sqlite';
 
-import { Layout } from '../../../stories/components/layout';
-import { MarkdownView } from '../../../stories/components/markdown-view';
+import { Layout } from 'stories/components/layout';
+import { MarkdownView } from 'stories/components/markdown-view';
+import { Post } from 'types/post';
 
 interface PostProps {
   post: string;
 }
 
-const Post = ({ post }: PostProps) => {
+const PostPage = ({ post }: PostProps) => {
   return (
     <Layout>
       <div className="markdown-body">
@@ -18,13 +21,19 @@ const Post = ({ post }: PostProps) => {
   );
 };
 
-export default Post;
+export default PostPage;
 
 export async function getStaticProps(context: GetStaticPropsContext) {
   try {
-    const post = fs
-      .readFileSync(`public/posts/${context.params?.id}.md`)
-      .toString();
+    const db = await open({
+      filename: 'db/blog.db',
+      driver: sqlite3.Database,
+    });
+
+    const file: Post[] = await db.all(
+      'SELECT * FROM posts WHERE id=' + context.params?.id
+    );
+    const post = fs.readFileSync(file[0].fileUrl).toString();
 
     return {
       props: { post },
@@ -40,17 +49,15 @@ export async function getStaticProps(context: GetStaticPropsContext) {
 
 export async function getStaticPaths() {
   try {
-    const posts = fs
-      .readdirSync('public/posts')
-      .map(file => file.split('.')[0]);
+    const db = await open({
+      filename: 'db/blog.db',
+      driver: sqlite3.Database,
+    });
 
-    const paths = posts
-      .filter(file => file.match(/\.md$/))
-      .map(post => ({
-        params: {
-          id: post,
-        },
-      }));
+    const posts = await db.all('SELECT * FROM posts');
+    const paths = posts.map(post => ({
+      params: { id: '' + post.id },
+    }));
 
     return { paths, fallback: 'blocking' };
   } catch (err) {

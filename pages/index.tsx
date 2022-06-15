@@ -1,18 +1,15 @@
 import type { GetServerSidePropsContext } from 'next';
-import fs from 'fs';
+
+import sqlite3 from 'sqlite3';
+import { open } from 'sqlite';
 import Head from 'next/head';
 
-import { PostBox } from '../stories/components/post-box';
-import { Layout } from '../stories/components/layout';
+import { Post } from 'types/post';
+import { PostBox } from 'stories/components/post-box';
+import { Layout } from 'stories/components/layout';
 
-type FileList = string[];
-interface Post {
-  title: string;
-  imgUrl?: string;
-  summary?: string;
-}
 interface HomeProps {
-  posts: FileList;
+  posts: Post[];
 }
 
 const Home = ({ posts }: HomeProps) => {
@@ -25,7 +22,7 @@ const Home = ({ posts }: HomeProps) => {
       </Head>
       <Layout>
         {posts.map(post => (
-          <PostBox title={post} postUrl={post} key={post} />
+          <PostBox {...post} key={+post.id} />
         ))}
       </Layout>
     </>
@@ -35,13 +32,20 @@ const Home = ({ posts }: HomeProps) => {
 export default Home;
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
-  const posts = fs
-    .readdirSync('public/posts')
-    .slice(0, 5)
-    .filter(file => file.match(/\.md$/))
-    .map(file => file.split('.')[0]);
+  try {
+    const db = await open({
+      filename: 'db/blog.db',
+      driver: sqlite3.Database,
+    });
 
-  return {
-    props: { posts },
-  };
+    const posts = await db.all(`SELECT * FROM posts LIMIT 5`);
+    return {
+      props: { posts },
+    };
+  } catch (err) {
+    console.error(err);
+    return {
+      props: { posts: [] },
+    };
+  }
 }
