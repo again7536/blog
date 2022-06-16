@@ -21,8 +21,6 @@ const PostForm = () => {
     setPost({ ...post, [key]: e.target.files ? e.target.files[0] : '' });
 
   const submitForm = async (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault();
-
     try {
       const formData = new FormData();
 

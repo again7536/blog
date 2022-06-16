@@ -1,12 +1,10 @@
 import type { GetServerSidePropsContext } from 'next';
-
-import sqlite3 from 'sqlite3';
-import { open } from 'sqlite';
 import Head from 'next/head';
+import caxios from 'src/lib/axios';
 
 import { Post } from 'types/post';
-import { PostBox } from 'stories/components/post-box';
-import { Layout } from 'stories/components/layout';
+import { PostBox } from 'src/stories/components/post-box';
+import { Layout } from 'src/stories/components/layout';
 
 interface HomeProps {
   posts: Post[];
@@ -33,17 +31,13 @@ export default Home;
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   try {
-    const db = await open({
-      filename: 'db/blog.db',
-      driver: sqlite3.Database,
-    });
+    const posts = await caxios.get('/posts?limit=5&offset=0');
 
-    const posts = await db.all(`SELECT * FROM posts LIMIT 5`);
     return {
-      props: { posts },
+      props: { posts: posts.data },
     };
-  } catch (err) {
-    console.error(err);
+  } catch (err: any) {
+    console.error(err.data);
     return {
       props: { posts: [] },
     };

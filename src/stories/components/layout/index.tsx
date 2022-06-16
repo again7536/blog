@@ -1,9 +1,10 @@
 import { SearchBar } from '../search-bar/search-bar';
-import { Navigation, NavLink } from '../navigation';
+import { Navigation, NavLink, AdminNavLink } from '../navigation';
 import { Logo } from '../logo';
 import { NavCol } from './nav-col';
-import { useBreakpoint } from 'lib/hooks/useBreakpoint';
+import { useBreakpoint } from 'src/lib/hooks/useBreakpoint';
 import { LayoutBackground } from './background';
+import { BlankErrorBoundary } from '../error-boundary/blank-error-boundary';
 
 interface LayoutProps {
   children: JSX.Element | JSX.Element[];
@@ -30,9 +31,11 @@ const Layout = ({ children }: LayoutProps) => {
               <NavLink href="#" color="blue">
                 느낀점
               </NavLink>
-              <NavLink href="/posts/new" color="green">
-                글쓰기
-              </NavLink>
+              <BlankErrorBoundary>
+                <AdminNavLink href="/posts/new" color="green">
+                  글쓰기
+                </AdminNavLink>
+              </BlankErrorBoundary>
             </Navigation>
           </NavCol>
           <div className="col-4 col-sm-8 col-md-9 col-xxl-10 p-0">

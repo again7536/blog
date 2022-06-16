@@ -1,6 +1,6 @@
 import { GetStaticPropsContext } from 'next';
-import { Layout } from '../../stories/components/layout';
-import { PostForm } from '../../stories/components/post-form';
+import { Layout } from 'src/stories/components/layout';
+import { PostForm } from 'src/stories/components/post-form';
 
 const PostNew = () => {
   return (

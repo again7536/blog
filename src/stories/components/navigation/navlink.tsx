@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 import Link from 'next/link';
+import { useAuth } from 'src/lib/hooks/useAuth';
+import { BlankErrorBoundary } from '../error-boundary/blank-error-boundary';
 
 interface NavLinkProps {
   color: string;
@@ -38,4 +40,13 @@ const NavLink = (props: NavLinkProps) => {
   );
 };
 
-export { NavLink };
+const AdminNavLink = (props: NavLinkProps) => {
+  const { isLoading, error, data } = useAuth();
+  return !isLoading && data ? (
+    <Link href={props.href}>
+      <StyledNavLink color={props.color}>{props.children}</StyledNavLink>
+    </Link>
+  ) : null;
+};
+
+export { NavLink, AdminNavLink };
