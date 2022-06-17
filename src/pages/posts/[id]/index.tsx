@@ -39,6 +39,8 @@ export async function getStaticProps(context: GetStaticPropsContext) {
 export async function getStaticPaths() {
   try {
     const posts = await caxios.get('/posts');
+    if (!posts.data) return { paths: [], fallback: 'blocking' };
+
     const paths = posts.data.map((post: any) => ({
       params: { id: '' + post.id },
     }));
