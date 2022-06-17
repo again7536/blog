@@ -1,6 +1,7 @@
 import { useRouter } from 'next/router';
 import { PostBoxContainer } from './container';
 import { PostBoxImage } from './image';
+import { PostBoxParagraph } from './paragraph';
 
 interface PostBoxProps {
   id: number;
@@ -18,12 +19,10 @@ const PostBox = ({ id, imgUrl, fileUrl, title, summary }: PostBoxProps) => {
 
   return (
     <PostBoxContainer onClick={handleClick}>
-      <div className="row">
-        <PostBoxImage src={'static/' + imgUrl?.slice(7)} />
-        <div className="col">
-          <h3>{title}</h3>
-          <p>{summary}</p>
-        </div>
+      <PostBoxImage src={'static/' + imgUrl?.slice(7)} />
+      <div className="p-2 px-md-3 col-12 col-md-7 col-xl-8">
+        <h4>{title}</h4>
+        <PostBoxParagraph>{summary}</PostBoxParagraph>
       </div>
     </PostBoxContainer>
   );

@@ -1,56 +1,62 @@
-import { SearchBar } from '../search-bar/search-bar';
-import { Navigation, NavLink, AdminNavLink } from '../navigation';
-import { Logo } from '../logo';
+import { useState, useEffect } from 'react';
+import { SearchBar } from '../search-bar';
 import { NavCol } from './nav-col';
-import { useBreakpoint } from 'src/lib/hooks/useBreakpoint';
 import { LayoutBackground } from './background';
-import { BlankErrorBoundary } from '../error-boundary/blank-error-boundary';
+import { LoginButton, Button } from '../button';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBars } from '@fortawesome/free-solid-svg-icons';
+import { Menu } from '../menu';
+import { useBreakpoint } from 'src/lib/hooks/useBreakpoint';
 
 interface LayoutProps {
-  children: JSX.Element | JSX.Element[];
+  children: JSX.Element[] | JSX.Element;
 }
 
 const Layout = ({ children }: LayoutProps) => {
+  const [openMenu, setOpenMenu] = useState<boolean>(false);
   const breakpoint = useBreakpoint();
+
+  const handleMenuClick = () => setOpenMenu(!openMenu);
+  const handleClose = () => setOpenMenu(false);
+
+  useEffect(() => {
+    if (breakpoint !== 'xs') handleClose();
+  }, [breakpoint]);
 
   return (
     <>
-      <main className="container">
+      <main className="container overflow-hidden">
         <div className="row">
-          <NavCol className="col-8 col-sm-4 col-md-3 col-xxl-2 px-0">
-            {/* Logo, SearchBar 높이를 패딩으로 조절해서 맞춤 */}
-            <Logo
-              className="pt-2 pb-3 px-3"
-              textAlign={breakpoint === 'xs' ? 'left' : 'center'}
-            />
+          <NavCol />
+          <div className="col-6 col-sm-8 col-md-9 col-xxl-10 p-0">
+            {/* PC */}
+            <div className="align-items-center d-none d-sm-flex">
+              <SearchBar />
+              <LoginButton />
+            </div>
+
+            {/* 모바일 */}
+            <div
+              className="w-100 d-flex d-sm-none justify-content-end align-items-center px-3"
+              style={{ height: '56px' }}
+            >
+              <Button color="red" onClick={handleMenuClick}>
+                <FontAwesomeIcon icon={faBars} className="fa-xl" />
+              </Button>
+            </div>
+
             <hr className="mt-0" />
-            <Navigation className="d-none d-sm-block">
-              <NavLink href="#" color="red">
-                개발
-              </NavLink>
-              <NavLink href="#" color="blue">
-                느낀점
-              </NavLink>
-              <BlankErrorBoundary>
-                <AdminNavLink href="/posts/new" color="green">
-                  글쓰기
-                </AdminNavLink>
-              </BlankErrorBoundary>
-            </Navigation>
-          </NavCol>
-          <div className="col-4 col-sm-8 col-md-9 col-xxl-10 p-0">
-            <SearchBar className="py-3" />
-            <hr className="mt-0" />
-            <section className={breakpoint === 'xs' ? 'd-none' : 'ps-3'}>
-              {children}
-            </section>
+            {/* PC */}
+            <section className="d-none d-sm-block m-4">{children}</section>
           </div>
         </div>
-        <div className={breakpoint !== 'xs' ? 'd-none' : 'row mt-3'}>
+        {/* 모바일 */}
+        <div className="d-sm-none row mt-3">
           <section>{children}</section>
         </div>
+        <Menu open={openMenu} closeMenu={handleClose}></Menu>
       </main>
-      <LayoutBackground></LayoutBackground>
+      <LayoutBackground />
     </>
   );
 };

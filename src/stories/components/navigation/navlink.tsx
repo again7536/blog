@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 import Link from 'next/link';
 import { useAuth } from 'src/lib/hooks/useAuth';
-import { BlankErrorBoundary } from '../error-boundary/blank-error-boundary';
 
 interface NavLinkProps {
   color: string;
@@ -42,7 +41,8 @@ const NavLink = (props: NavLinkProps) => {
 
 const AdminNavLink = (props: NavLinkProps) => {
   const { isLoading, error, data } = useAuth();
-  return !isLoading && data ? (
+
+  return !isLoading && data?.authLevel === 'admin' ? (
     <Link href={props.href}>
       <StyledNavLink color={props.color}>{props.children}</StyledNavLink>
     </Link>

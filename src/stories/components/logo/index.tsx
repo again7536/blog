@@ -4,9 +4,9 @@ import { useRouter } from 'next/router';
 const LogoStyle = styled.div.attrs(props => ({
   ...props,
 }))`
-  vertical-align: baseline;
+  vertical-align: middle;
   text-align: ${(props: any) => props.textAlign ?? 'center'};
-  line-height: 24pt;
+  line-height: ${(props: any) => props.style.height ?? '24pt'};
   font-size: 18pt;
   cursor: pointer;
 

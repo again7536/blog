@@ -1,16 +1,20 @@
 import styled from 'styled-components';
 
 const PostBoxImage = styled.img.attrs(props => ({
-  className: 'col-12 col-sm-12 col-md-6 col-xl-4 ' + props.className,
+  className: 'col-12 col-sm-12 col-md-5 col-xl-4 ' + props.className,
   src: props.src,
 }))`
-  height: 150px;
-  max-width: 300px;
+  min-width: 100%;
+  max-height: 150px;
+
+  padding: 0;
 
   object-fit: cover;
 
-  @media screen and (max-width: 576px) {
-    max-width: none;
+  @media screen and (min-width: 768px) {
+    min-width: unset;
+    max-height: unset;
+    min-height: 100%;
   }
 `;
 
