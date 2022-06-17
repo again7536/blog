@@ -19,9 +19,12 @@ const Home = ({ posts }: HomeProps) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Layout>
-        {posts.map(post => (
-          <PostBox {...post} key={+post.id} />
-        ))}
+        <h2 className="mb-3">최근 포스팅</h2>
+        <>
+          {posts.map(post => (
+            <PostBox {...post} key={+post.id} />
+          ))}
+        </>
       </Layout>
     </>
   );
