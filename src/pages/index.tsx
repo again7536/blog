@@ -16,6 +16,7 @@ const Home = ({ posts }: HomeProps) => {
       <Head>
         <title>Shorecrab&apos;s blog</title>
         <meta name="description" content="shorecrab's dev blog" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Layout>

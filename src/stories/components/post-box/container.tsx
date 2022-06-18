@@ -6,7 +6,7 @@ const PostBoxContainer = styled.div.attrs(props => ({
 }))`
   cursor: pointer;
   border: 1px solid #3c3c3c20;
-  box-shadow: 0 0 5px 2px #3c3c3c20;
+  box-shadow: 0 0 4px 1.5px #3c3c3c20;
   border-radius: 10px;
   padding: 0;
   margin: 0;

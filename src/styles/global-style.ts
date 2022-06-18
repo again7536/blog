@@ -44,12 +44,9 @@ const GlobalStyle = createGlobalStyle<{ theme: ThemeType }>`
         font-weight: 700;
         font-style: normal;
     }
-    html{
+    html, body{
         width:100vw;
         overflow-x:hidden;
-    }
-    body {
-
         font-family: "Noto Sans KR"
     }
 `;
