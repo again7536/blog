@@ -19,7 +19,7 @@ const PostBox = ({ id, imgUrl, fileUrl, title, summary }: PostBoxProps) => {
 
   return (
     <PostBoxContainer onClick={handleClick}>
-      <PostBoxImage src={'static/' + imgUrl?.slice(7)} />
+      <PostBoxImage src={'static' + imgUrl?.slice(7)} />
       <div className="p-2 px-md-3 col-12 col-md-7 col-xl-8">
         <h4>{title}</h4>
         <PostBoxParagraph>{summary}</PostBoxParagraph>
