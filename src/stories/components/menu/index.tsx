@@ -20,7 +20,7 @@ const MenuContainer = styled.div<{ open: boolean }>`
   background-color: white;
   padding: 10px 15px 0 5px;
 
-  position: absolute;
+  position: fixed;
   top: 0;
   width: 250px;
   right: -250px;

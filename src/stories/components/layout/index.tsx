@@ -54,9 +54,9 @@ const Layout = ({ children }: LayoutProps) => {
         <div className="d-sm-none row mt-3">
           <section>{children}</section>
         </div>
-        <Menu open={openMenu} closeMenu={handleClose}></Menu>
       </main>
       <LayoutBackground />
+      <Menu open={openMenu} closeMenu={handleClose}></Menu>
     </>
   );
 };
