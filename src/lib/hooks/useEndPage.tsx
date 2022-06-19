@@ -1,18 +1,18 @@
 import { useQuery } from 'react-query';
 import caxios from 'src/lib/axios';
 
-const useAuth = () => {
+const useEndPage = () => {
   const { isLoading, error, data } = useQuery<
     unknown,
     unknown,
-    { authLevel: string }
-  >('authLevel', async () => {
-    const result = await caxios.get('/auth/verify');
+    { endPage: number }
+  >('endPage', async () => {
+    const result = await caxios.get('/posts/count');
     if (result.status >= 400) throw Error('400 error');
-    return result.data;
+    return { endPage: Math.ceil(result.data / 5) };
   });
 
   return { isLoading, error, data };
 };
 
-export { useAuth };
+export { useEndPage };
