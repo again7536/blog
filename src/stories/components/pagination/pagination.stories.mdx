@@ -1,14 +1,11 @@
 import { Canvas, Meta, Story } from '@storybook/addon-docs';
-import { SearchBar } from './index';
+import { Pagination } from './index';
 
-export const WrappedSearchBar = (props) => (
-    <SearchBar {...props}/>
-);
-<Meta title="MDX/Navigation" component={WrappedSearchBar} />
+<Meta title="MDX/Pagination" component={Pagination} />
 
-export const Template = args => <WrappedSearchBar {...args} />;
+export const Template = args => <Pagination {...args} />;
 
-# Navigation
+# Pagination
 
 With `MDX`, we can define a story for `Navigation` right in the middle of our Markdown documentation.
 
@@ -16,7 +13,7 @@ With `MDX`, we can define a story for `Navigation` right in the middle of our Ma
   <Story
     name="Default"
     args={{
-      color:''
+        page:1
     }}
   >
     {Template.bind({})}
