@@ -14,10 +14,11 @@ const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
       retry: 0,
-      useErrorBoundary: true,
+      useErrorBoundary: false,
+      staleTime: 600 * 1000,
     },
     mutations: {
-      useErrorBoundary: true,
+      useErrorBoundary: false,
     },
   },
 });

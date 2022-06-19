@@ -1,16 +1,24 @@
 import type { GetServerSidePropsContext } from 'next';
+import { useState } from 'react';
+import { useRecoilValue } from 'recoil';
 import Head from 'next/head';
 import caxios from 'src/lib/axios';
 
 import { Post } from 'types/post';
 import { PostBox } from 'src/stories/components/post-box';
 import { Layout } from 'src/stories/components/layout';
+import { pageState } from 'src/atoms/page';
+import { usePosts } from 'src/lib/hooks/usePosts';
+import { Pagination } from 'src/stories/components/pagination';
 
 interface HomeProps {
-  posts: Post[];
+  initialPosts: Post[];
 }
 
-const Home = ({ posts }: HomeProps) => {
+const Home = ({ initialPosts }: HomeProps) => {
+  const page = useRecoilValue(pageState);
+  const { isLoading, data, error } = usePosts(page, initialPosts);
+
   return (
     <>
       <Head>
@@ -22,10 +30,11 @@ const Home = ({ posts }: HomeProps) => {
       <Layout>
         <h2 className="mb-3">최근 포스팅</h2>
         <>
-          {posts.map(post => (
-            <PostBox {...post} key={+post.id} />
-          ))}
+          {!isLoading && !error && data?.posts
+            ? data.posts.map(post => <PostBox {...post} key={+post.id} />)
+            : null}
         </>
+        <Pagination paginationItemCount={5} />
       </Layout>
     </>
   );
@@ -38,7 +47,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
     const posts = await caxios.get('/posts?limit=5&offset=0');
 
     return {
-      props: { posts: posts.data },
+      props: { initialPosts: posts.data },
     };
   } catch (err: any) {
     console.error(err.data);
