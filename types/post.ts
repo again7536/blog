@@ -2,7 +2,7 @@ interface Post {
   id: number;
   title: string;
   imgUrl?: string;
-  fileUrl: string;
+  markdown: string;
   summary?: string;
 }
 

@@ -7,7 +7,7 @@ const useEndPage = () => {
     unknown,
     { endPage: number }
   >('endPage', async () => {
-    const result = await caxios.get('/posts/count');
+    const result = await caxios.get<number>('/posts/count');
     if (result.status >= 400) throw Error('400 error');
     return { endPage: Math.ceil(result.data / 5) };
   });

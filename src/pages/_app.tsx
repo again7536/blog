@@ -1,5 +1,7 @@
 import 'node_modules/bootstrap/dist/css/bootstrap.min.css';
 import 'node_modules/github-markdown-css/github-markdown.css';
+import '@toast-ui/editor/dist/toastui-editor.css';
+
 import GlobalStyle from 'src/styles/global-style';
 import type { AppProps } from 'next/app';
 import { ThemeProvider } from 'styled-components';

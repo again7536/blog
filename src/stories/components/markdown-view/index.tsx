@@ -3,10 +3,10 @@ import SyntaxHighlighter from 'react-syntax-highlighter';
 import { docco } from 'react-syntax-highlighter/dist/cjs/styles/hljs';
 
 interface MarkdownViewProps {
-  post: string;
+  markdown: string;
 }
 
-const MarkdownView = ({ post }: MarkdownViewProps) => {
+const MarkdownView = ({ markdown }: MarkdownViewProps) => {
   return (
     <ReactMarkdown
       components={{
@@ -38,7 +38,7 @@ const MarkdownView = ({ post }: MarkdownViewProps) => {
         },
       }}
     >
-      {post}
+      {markdown}
     </ReactMarkdown>
   );
 };

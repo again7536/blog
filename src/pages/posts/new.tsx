@@ -1,11 +1,16 @@
 import { GetStaticPropsContext } from 'next';
+import dynamic from 'next/dynamic';
 import { Layout } from 'src/stories/components/layout';
-import { PostForm } from 'src/stories/components/post-form';
+
+const MarkdownEditor = dynamic<any>(
+  () => import('src/stories/components/editor').then(mod => mod.MarkdownEditor),
+  { ssr: false }
+);
 
 const PostNew = () => {
   return (
     <Layout>
-      <PostForm />
+      <MarkdownEditor />
     </Layout>
   );
 };

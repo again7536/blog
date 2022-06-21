@@ -10,6 +10,7 @@ const ContentSecurityPolicy =
     ? `
   default-src 'self';
   font-src 'self' data: ;
+  img-src 'self' data: ;
 `
     : `
   default-src 'self';
@@ -17,6 +18,7 @@ const ContentSecurityPolicy =
   connect-src 'self' webpack://*;
   style-src 'unsafe-inline';
   font-src 'self' data: ;
+  img-src 'self' data: ;
 `;
 
 const securityHeaders = [
@@ -54,8 +56,8 @@ const nextDevConfig = {
         destination: `http://localhost:5000/:path*`,
       },
       {
-        source: '/static/:path*',
-        destination: `http://localhost:5000/static/:path*`,
+        source: '/uploads/:path*',
+        destination: `http://localhost:5000/uploads/:path*`,
       },
     ];
   },

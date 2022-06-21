@@ -1,5 +1,4 @@
 import type { GetServerSidePropsContext } from 'next';
-import { useState } from 'react';
 import { useRecoilValue } from 'recoil';
 import Head from 'next/head';
 import caxios from 'src/lib/axios';
@@ -44,7 +43,7 @@ export default Home;
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   try {
-    const posts = await caxios.get('/posts?limit=5&offset=0');
+    const posts = await caxios.get<Post[]>('/posts?limit=5&offset=0');
 
     return {
       props: { initialPosts: posts.data },

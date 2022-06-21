@@ -12,7 +12,9 @@ const usePosts = (page: number, initialPosts: Post[]) => {
   >(
     'posts',
     async () => {
-      const result = await caxios.get(`/posts?limit=5&offset=${offset}`);
+      const result = await caxios.get<Post[]>(
+        `/posts?limit=5&offset=${offset}`
+      );
       if (result.status >= 400) throw Error('error');
       return result.data;
     },
@@ -20,7 +22,7 @@ const usePosts = (page: number, initialPosts: Post[]) => {
   );
 
   useEffect(() => {
-    if (!isLoading && !error && data?.posts)
+    if (!isLoading && !error && data && data.posts.length > 0)
       setOffset(data.posts[data.posts.length - 1].id);
   }, [isLoading, error, data]);
 
