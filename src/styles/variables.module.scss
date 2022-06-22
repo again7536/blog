@@ -1,0 +1,22 @@
+$grid-breakpoints: (
+  xs: 0,
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1400px,
+  xxl: 1800px,
+);
+
+$container-max-widths: (
+  sm: 540px,
+  md: 720px,
+  lg: 920px,
+  xl: 1240px,
+  xxl: 1620px,
+);
+
+:export {
+  @each $key, $value in $grid-breakpoints {
+    #{unquote($key)}: $value;
+  }
+}
