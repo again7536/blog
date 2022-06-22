@@ -1,30 +1,24 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useMemo } from 'react';
 import { useQuery } from 'react-query';
 import caxios from 'src/lib/axios';
 import { Post } from 'types/post';
 
 const usePosts = (page: number, initialPosts: Post[]) => {
-  const [offset, setOffset] = useState<number>(0);
   const { isLoading, error, data } = useQuery<
     unknown,
     unknown,
     { posts: Post[] }
   >(
-    'posts',
+    ['posts', page],
     async () => {
       const result = await caxios.get<Post[]>(
-        `/posts?limit=5&offset=${offset}`
+        `/posts?limit=5&offset=${(page - 1) * 5}`
       );
       if (result.status >= 400) throw Error('error');
       return result.data;
     },
-    { initialData: initialPosts }
+    { initialData: initialPosts, staleTime: 0 }
   );
-
-  useEffect(() => {
-    if (!isLoading && !error && data && data.posts.length > 0)
-      setOffset(data.posts[data.posts.length - 1].id);
-  }, [isLoading, error, data]);
 
   return { isLoading, error, data };
 };

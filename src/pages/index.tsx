@@ -17,7 +17,6 @@ interface HomeProps {
 const Home = ({ initialPosts }: HomeProps) => {
   const page = useRecoilValue(pageState);
   const { isLoading, data, error } = usePosts(page, initialPosts);
-
   return (
     <>
       <Head>
@@ -31,7 +30,7 @@ const Home = ({ initialPosts }: HomeProps) => {
         <>
           {!isLoading && !error && data?.posts
             ? data.posts.map(post => <PostBox {...post} key={+post.id} />)
-            : null}
+            : []}
         </>
         <Pagination paginationItemCount={5} />
       </Layout>
